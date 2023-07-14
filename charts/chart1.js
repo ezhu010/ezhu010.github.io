@@ -104,23 +104,23 @@ var data = {
   .attr('transform', 'rotate(-90)')
   .text('Covid-19 Cases');
 
-  // var annotations = [
-  //   {
-  //     note: { title: 'Title 1' },
-  //     x: x('Mar20'),
-  //     y: y(8),
-  //     dx: 50,
-  //     dy: -80,
-  //   },
-  //   {
-  //     note: { title: 'Title 2' },
-  //     x: x('Feb20'),
-  //     y: y(61),
-  //     dx: 20,
-  //     dy: -50,
-  //   },
-  //   // Add more annotations as needed
-  // ];
+  var annotations = [
+    {
+      note: { title: 'Title 1' },
+      x: x('Mar20'),
+      y: y(8),
+      dx: 50,
+      dy: -80,
+    },
+    {
+      note: { title: 'Title 2' },
+      x: x('Feb20'),
+      y: y(61),
+      dx: 20,
+      dy: -50,
+    },
+    // Add more annotations as needed
+  ];
   
   // var makeAnnotations = d3
   //   .annotation()
