@@ -45,11 +45,29 @@ img {vertical-align: middle;}
   text-align: center;
 }
 
+#bar-chart3 {
+  position: absolute;
+  top: 100px; 
+  width: 100%; 
+  text-align: center;
+}
+
 #bar-chart {
   position: absolute;
   top: 100px; 
   width: 100%; 
   text-align: center;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #f9f9f9;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 9999;
 }
 
 /* Caption text */

@@ -4,9 +4,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="d3.v7.min.js"></script>
+<script src="d3-annotation.min.js"></script>
+
 </head>
 
 <body>
+
+<div class="tooltip"></div>
+
 <div class="slideshow-container">
   <div class="mySlides fade">
     <h1 class="text">Introduction</h1>
@@ -22,7 +27,7 @@
 </div>
 
 <div class="mySlides fade">
-  <h1 class="text">Hello World 4</h1>
+  <svg id="bar-chart3"></svg>
 </div>
 
 <a class="prev" onclick="plusSlides(-1)">❮</a>
@@ -68,6 +73,8 @@ function showSlides(n) {
 </script>
 <script src="./charts/chart1.js"></script>
 <script src="./charts/chart2.js"></script>
+<script src="./charts/chart3.js"></script>
+
 
 
 </body>

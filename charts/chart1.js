@@ -14,6 +14,10 @@ var data = {
     Dec20: 6170028
   };
   
+
+  var colors = {
+    '20': 'blue',
+  };
   // Convert data into an array of key-value pairs
   var dataArray = Object.entries(data);
   
@@ -36,12 +40,19 @@ var data = {
     .range([0, width])
     .padding(0.3);
   
+
+  var tooltip = d3
+    .select('body')
+    .append('div')
+    .attr('class', 'tooltip')
+    .style('opacity', 0)
+    .style('z-index', 9999); 
   // Set the y-axis scale and axis
   var y = d3.scaleLinear().range([height, 0]);
   
   // Set the domain of x and y scales
   x.domain(dataArray.map(function (d) { return d[0]; }));
-  y.domain([0, d3.max(dataArray, function (d) { return d[1]; })]);
+  y.domain([0, 20444764]);
   
   // Append the bars
   svg.selectAll(".bar")
@@ -52,7 +63,29 @@ var data = {
     .attr("x", function (d) { return x(d[0]); })
     .attr("width", x.bandwidth())
     .attr("y", function (d) { return y(d[1]); })
-    .attr("height", function (d) { return height - y(d[1]); });
+    .attr("height", function (d) { return height - y(d[1]); })
+    .attr('fill', (d) => colors[d[0].substring(d[0].length - 2)])
+    .on('mouseover', function (d,i) {
+      // Get the mouse coordinates
+      var x = event.pageX;
+      var y = event.pageY;
+  
+      // Get the value of the current bar
+      console.log(d);
+      var value = i[1];
+  
+      // Show the tooltip and position it at the mouse coordinates
+      d3.select('.tooltip')
+        .style('display', 'block')
+        .style('left', x + 'px')
+        .style('top', y + 'px')
+        .text(value);
+    })
+    .on('mouseout', function () {
+      // Hide the tooltip when mouse is no longer over the bar
+      d3.select('.tooltip').style('display', 'none');
+    });
+
   
   // Append the x-axis
   svg.append("g")
@@ -62,4 +95,37 @@ var data = {
   // Append the y-axis
   svg.append("g")
     .call(d3.axisLeft(y));
+
+  svg
+  .append('text')
+  .attr('x', -120)
+  .attr('y',-70)
+  .attr('text-anchor', 'middle')
+  .attr('transform', 'rotate(-90)')
+  .text('Covid-19 Cases');
+
+  // var annotations = [
+  //   {
+  //     note: { title: 'Title 1' },
+  //     x: x('Mar20'),
+  //     y: y(8),
+  //     dx: 50,
+  //     dy: -80,
+  //   },
+  //   {
+  //     note: { title: 'Title 2' },
+  //     x: x('Feb20'),
+  //     y: y(61),
+  //     dx: 20,
+  //     dy: -50,
+  //   },
+  //   // Add more annotations as needed
+  // ];
+  
+  // var makeAnnotations = d3
+  //   .annotation()
+  //   .type(d3.annotationLabel)
+  //   .annotations(annotations);
+  
+  // svg.append('g').attr('class', 'annotations').call(makeAnnotations);
   
