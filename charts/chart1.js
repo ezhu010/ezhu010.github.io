@@ -72,14 +72,14 @@ var data = {
   
       // Get the value of the current bar
       console.log(d);
-      var value = i[1];
+      var value = i[1].toLocaleString();
   
       // Show the tooltip and position it at the mouse coordinates
       d3.select('.tooltip')
         .style('display', 'block')
         .style('left', x + 'px')
         .style('top', y + 'px')
-        .text(value);
+        .text("Covid Cases: " + value);
     })
     .on('mouseout', function () {
       // Hide the tooltip when mouse is no longer over the bar
@@ -106,26 +106,39 @@ var data = {
 
   var annotations = [
     {
-      note: { title: 'Title 1' },
-      x: x('Mar20'),
+      note: { title: 'US First Covid Case' },
+      x: x('Jan20'),
       y: y(8),
-      dx: 50,
-      dy: -80,
+      dx: 20,
+      dy: -100,
     },
     {
-      note: { title: 'Title 2' },
-      x: x('Feb20'),
+      note: { title: 'WHO declares covid a global pandemic' },
+      x: x('Mar20'),
       y: y(61),
       dx: 20,
-      dy: -50,
+      dy: -130,
     },
-    // Add more annotations as needed
+    {
+      note: { title: 'AstraZeneca receives more than $1 billion from the U.S. government for production of vaccines' },
+      x: x('May20'),
+      y: y(755116),
+      dx: 20,
+      dy: -150,
+    },
+    {
+      note: { title: 'Moderna\'s COVID-19 vaccine is found to be 95.4% effective in its clinical trial.' },
+      x: x('Nov20'),
+      y: y(4374916),
+      dx: 20,
+      dy: -150,
+    },
   ];
   
-  // var makeAnnotations = d3
-  //   .annotation()
-  //   .type(d3.annotationLabel)
-  //   .annotations(annotations);
+  var makeAnnotations = d3
+    .annotation()
+    .type(d3.annotationLabel)
+    .annotations(annotations);
   
-  // svg.append('g').attr('class', 'annotations').call(makeAnnotations);
+  svg.append('g').attr('class', 'annotations').call(makeAnnotations);
   

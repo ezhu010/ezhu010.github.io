@@ -82,15 +82,14 @@ var data = {
       var y = event.pageY;
   
       // Get the value of the current bar
-      console.log(d);
-      var value = i[1];
+      var value = i[1].toLocaleString();
   
       // Show the tooltip and position it at the mouse coordinates
       d3.select('.tooltip')
         .style('display', 'block')
         .style('left', x + 'px')
         .style('top', y + 'px')
-        .text('Value: ' + value);
+        .text("Covid Cases: " + value);
     })
     .on('mouseout', function () {
       // Hide the tooltip when mouse is no longer over the bar
@@ -116,3 +115,62 @@ svg
   .attr('transform', 'rotate(-90)')
   .text('Covid-19 Cases');
   
+
+  var annotations = [
+    {
+      note: { title: 'US First Covid Case' },
+      x: x('Jan20'),
+      y: y(8),
+      dx: 20,
+      dy: -100,
+    },
+    {
+      note: { title: 'WHO declares covid a global pandemic' },
+      x: x('Mar20'),
+      y: y(61),
+      dx: 20,
+      dy: -130,
+    },
+    {
+      note: { title: 'AstraZeneca receives more than $1 billion from the U.S. government for production of vaccines' },
+      x: x('May20'),
+      y: y(755116),
+      dx: 20,
+      dy: -150,
+    },
+    {
+      note: { title: 'Moderna\'s COVID-19 vaccine is found to be 95.4% effective in its clinical trial.' },
+      x: x('Nov20'),
+      y: y(4374916),
+      dx: 20,
+      dy: -150,
+    },
+    {
+      note: { title: 'More than 23 million COVID-19 vaccine doses have been administered in the U.S.' },
+      x: x('Jan21'),
+      y: y(6285448),
+      dx: 20,
+      dy: -150,
+    },
+    {
+      note: { title: '“Delta” variant, first identified in India, becomes the dominant variant in the US' },
+      x: x('Jun21'),
+      y: y(385721),
+      dx: 20,
+      dy: -300,
+    },
+    {
+      note: { title: 'The first case of the Omicron variant in the U.S' },
+      x: x('Dec21'),
+      y: y(5449603),
+      dx: 20,
+      dy: -250,
+    },
+  ];
+  
+  var makeAnnotations = d3
+    .annotation()
+    .type(d3.annotationLabel)
+    .annotations(annotations);
+  
+  svg.append('g').attr('class', 'annotations').call(makeAnnotations);
