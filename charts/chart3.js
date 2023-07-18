@@ -183,7 +183,7 @@ var data = {
         dy: -15,
       },
       {
-        note: { title: 'Biden declares COVID-19 pandemic is over in the U.S.' },
+        note: { title: 'Biden declares COVID-19 pandemic over in the U.S.' },
         x: x('Sep22'),
         y: y(1858371),
         dx: -75,
