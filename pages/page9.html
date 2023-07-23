@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<script src="../d3.v7.min.js"></script>
+<script src="../d3-annotation.min.js"></script>
+
+</head>
+
+<body>
+<div class="tooltip"></div>
+<h1># of Covid Cases by Day in September 2020</h1>
+<svg id="mini-chart3"></svg>
+<br>
+<button id="homeButton">Home</button>
+</body>
+<script>
+    // Handle the click event of the back button
+    document.getElementById("homeButton").addEventListener("click", function() {
+        // Redirect back to the previous page
+        window.location.href = "../index.html"; // Adjust the URL based on your file structure
+    });
+</script>
+<script src="../miniCharts/miniChart9.js"></script>
+
+
+</html> 

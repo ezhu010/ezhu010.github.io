@@ -1,3 +1,11 @@
+// const data = [
+//   { label: "Jan20", value: 8, link: "./pages/index2.html" },
+//   { label: "Bar 2", value: 30, link: "https://example.com/page2" },
+//   { label: "Bar 3", value: 15, link: "https://example.com/page3" },
+//   // Add more data objects as needed
+// ];
+
+
 var data = {
     Jan20: 8,
     Feb20: 61,
@@ -45,6 +53,9 @@ var data = {
   };
   // Convert data into an array of key-value pairs
   var dataArray = Object.entries(data);
+  for(let i = 0; i < dataArray.length; i++){
+    dataArray[i].push(`./pages/page${i + 1}.html`)
+  }
   
   // Set up the dimensions and margins of the graph
   var margin = { top: 20, right: 20, bottom: 30, left: 100 },
@@ -105,7 +116,12 @@ var data = {
       })
       .on('mouseout', function () {
         d3.select('.tooltip').style('display', 'none');
-      });
+      })
+      .on("click", (d,i) => {
+        console.log(i);
+        // Redirect to the local HTML page when the bar is clicked
+        window.location.href = i[2];
+    });
 
   
   svg.append("g")
