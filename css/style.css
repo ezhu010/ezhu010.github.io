@@ -28,7 +28,7 @@ img {vertical-align: middle;}
   transition: background-color 0.3s ease; /* Smooth transition on hover */
   margin: 20px;
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
   line-height: 1;
   text-align: center;
