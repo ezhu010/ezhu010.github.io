@@ -58,7 +58,9 @@ In the year 2021, the battle against COVID-19 continued as new variants of the v
 </div>
 
 <div class="mySlides fade">
+  <div id="container">
   <svg id="bar-chart3"></svg>
+  </div>
   <h1 class="sceneText">Scene 3</h1>
   <div class="legend" id="legend">
     <span class="blue"></span> 2020<br>
@@ -73,6 +75,15 @@ In the year 2021, the battle against COVID-19 continued as new variants of the v
       <br> <br>
     In the year 2022, the world witnessed a turning point in the battle against COVID-19. With widespread vaccination, the virus's grip began to loosen, leading to a decline in cases and hospitalizations. Economies slowly rebounded as restrictions eased, allowing businesses to recover and people to rebuild their lives. Global cooperation in sharing vaccines and resources paved the way for a more equitable distribution. Although challenges remained, the resilience and unity of humanity prevailed, heralding a hopeful new chapter in the fight against the pandemic.
   </p>
+  <label for="startMonth">Start Month:</label>
+  <input type="month" id="startMonth" name="startMonth" min="2020-01" max="2022-12">
+
+  <label for="endMonth">End Month:</label>
+  <input type="month" id="endMonth" name="endMonth" min="2020-01" max="2022-12">
+
+  <button onclick="updateChart()">Update Chart</button>
+  <button onclick="reset()">Reset</button>
+
 </div>
 
 <a class="prev" onclick="plusSlides(-1)">❮</a>
@@ -89,8 +100,11 @@ In the year 2021, the battle against COVID-19 continued as new variants of the v
 </div>
 
 <script>
-let slideIndex = 1;
-localStorage.setItem('slideIndex', 1)
+  let slideIndex = 1;
+  if(localStorage.getItem("end") == "true"){
+    slideIndex = 4
+  }
+
 showSlides(slideIndex);
 
 function plusSlides(n) {
@@ -102,6 +116,9 @@ function currentSlide(n) {
 }
 
 function showSlides(n) {
+  if(n == 4){
+    localStorage.setItem("end", "true")
+  }
   let i;
   let slides = document.getElementsByClassName("mySlides");
   let dots = document.getElementsByClassName("dot");
@@ -120,9 +137,48 @@ function showSlides(n) {
 <script src="./charts/chart1.js"></script>
 <script src="./charts/chart2.js"></script>
 <script src="./charts/chart3.js"></script>
+<script>
+  function formatDateToMonYY(yyyymm) {
+            const [year, month] = yyyymm.split("-");
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const shortYear = year.slice(-2);
+            return monthNames[parseInt(month) - 1] + shortYear;
+  }
+  function updateChart(){
+    var startMonth = document.getElementById("startMonth").value;
+    var endMonth = document.getElementById("endMonth").value;
+    var startMonYY = formatDateToMonYY(startMonth);
+    var endMonYY = formatDateToMonYY(endMonth);
+    var start;
+    var end;
+    console.log(startMonYY);
+    console.log(endMonYY);
+    if(!startMonYY && !endMonYY){
+      return
+    }
+    for(var i = 0; i < dataArray.length; i++){
+      if(startMonYY == dataArray[i][0]){
+        start = i
+      }
+      if(endMonYY == dataArray[i][0]){
+        end = i
+      }
+    }
 
+    
+    newdataArray = dataArray.slice(start, end + 1);
+    console.log(newdataArray);
+    d3.select("#bar-chart3").remove()
+    d3.select("#container").append("svg").attr("id", "bar-chart3")
+    drawChart(newdataArray, true)
+  }
 
+  function reset(){
+    localStorage.setItem("end", "false")
+    window.location.reload();
+  }
 
+</script>
 </body>
 
 </html> 

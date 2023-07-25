@@ -5,64 +5,66 @@
 //   // Add more data objects as needed
 // ];
 
-
 var data = {
-    Jan20: 8,
-    Feb20: 61,
-    Mar20: 173074,
-    Apr20: 857163,
-    May20: 755116,
-    Jun20: 821191,
-    Jul20: 1884228,
-    Aug20: 1524538,
-    Sep20: 1201705,
-    Oct20: 1815557,
-    Nov20: 4374916,
-    Dec20: 6170028,
-    Jan21: 6285448,
-    Feb21: 2467058,
-    Mar21: 1776581,
-    Apr21: 1832202,
-    May21: 981676,
-    Jun21: 385721,
-    Jul21: 1373312,
-    Aug21: 4114589,
-    Sep21: 4185050,
-    Oct21: 2660463,
-    Nov21: 2444998,
-    Dec21: 5449603,
-    Jan22: 20444764,
-    Feb22: 4380740,
-    Mar22: 1022157,
-    Apr22: 1163440,
-    May22: 2698000,
-    Jun22: 3066561,
-    Jul22: 3922935,
-    Aug22: 2879420,
-    Sep22: 1858371,
-    Oct22: 1204618,
-    Nov22: 1125356,
-    Dec22: 2111048
-  };
-  
+  Jan20: 8,
+  Feb20: 61,
+  Mar20: 173074,
+  Apr20: 857163,
+  May20: 755116,
+  Jun20: 821191,
+  Jul20: 1884228,
+  Aug20: 1524538,
+  Sep20: 1201705,
+  Oct20: 1815557,
+  Nov20: 4374916,
+  Dec20: 6170028,
+  Jan21: 6285448,
+  Feb21: 2467058,
+  Mar21: 1776581,
+  Apr21: 1832202,
+  May21: 981676,
+  Jun21: 385721,
+  Jul21: 1373312,
+  Aug21: 4114589,
+  Sep21: 4185050,
+  Oct21: 2660463,
+  Nov21: 2444998,
+  Dec21: 5449603,
+  Jan22: 20444764,
+  Feb22: 4380740,
+  Mar22: 1022157,
+  Apr22: 1163440,
+  May22: 2698000,
+  Jun22: 3066561,
+  Jul22: 3922935,
+  Aug22: 2879420,
+  Sep22: 1858371,
+  Oct22: 1204618,
+  Nov22: 1125356,
+  Dec22: 2111048
+};
+var dataArray = Object.entries(data);
+for(let i = 0; i < dataArray.length; i++){
+  dataArray[i].push(`./pages/page${i + 1}.html`)
+}
+
+
+
+
+function drawChart(dataArray, isFilter){
+  console.log(dataArray);
 
   var colors = {
     '20': 'blue',
     '21': 'green',
     '22': 'orange',
   };
-  // Convert data into an array of key-value pairs
-  var dataArray = Object.entries(data);
-  for(let i = 0; i < dataArray.length; i++){
-    dataArray[i].push(`./pages/page${i + 1}.html`)
-  }
+
   
-  // Set up the dimensions and margins of the graph
   var margin = { top: 20, right: 20, bottom: 30, left: 100 },
     width = 1500 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
   
-  // Create the SVG element
   var svg = d3
     .select("#bar-chart3")
     .attr("width", width + margin.left + margin.right)
@@ -118,7 +120,7 @@ var data = {
         d3.select('.tooltip').style('display', 'none');
       })
       .on("click", (d,i) => {
-        console.log(i);
+        localStorage.setItem("end", "false")
         // Redirect to the local HTML page when the bar is clicked
         window.location.href = i[2];
     });
@@ -140,8 +142,7 @@ var data = {
     .attr('transform', 'rotate(-90)')
     .text('Covid-19 Cases');
 
-
-    var annotations = [
+    var annotations3 = [
       {
         note: { title: 'US First Covid Case' },
         x: x('Jan20'),
@@ -206,11 +207,19 @@ var data = {
         dy: -100,
       },
     ];
+    if(isFilter){
+      return 
+    }
+    console.log(annotations3);
     
     var makeAnnotations = d3
       .annotation()
       .type(d3.annotationLabel)
-      .annotations(annotations);
+      .annotations(annotations3);
     
     svg.append('g').attr('class', 'annotations').style("overflow-x", "auto").call(makeAnnotations);
-  
+
+}
+drawChart(dataArray)
+
+
