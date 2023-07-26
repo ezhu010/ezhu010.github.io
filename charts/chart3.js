@@ -120,7 +120,6 @@ function drawChart(dataArray, isFilter){
         d3.select('.tooltip').style('display', 'none');
       })
       .on("click", (d,i) => {
-        localStorage.setItem("end", "false")
         // Redirect to the local HTML page when the bar is clicked
         window.location.href = i[2];
     });

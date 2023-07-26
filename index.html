@@ -101,9 +101,6 @@ In the year 2021, the battle against COVID-19 continued as new variants of the v
 
 <script>
   let slideIndex = 1;
-  if(localStorage.getItem("end") == "true"){
-    slideIndex = 4
-  }
 
 showSlides(slideIndex);
 
@@ -116,9 +113,6 @@ function currentSlide(n) {
 }
 
 function showSlides(n) {
-  if(n == 4){
-    localStorage.setItem("end", "true")
-  }
   let i;
   let slides = document.getElementsByClassName("mySlides");
   let dots = document.getElementsByClassName("dot");
@@ -174,7 +168,6 @@ function showSlides(n) {
   }
 
   function reset(){
-    localStorage.setItem("end", "false")
     window.location.reload();
   }
 
